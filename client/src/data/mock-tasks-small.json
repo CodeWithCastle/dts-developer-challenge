@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "title": "Review Case File #8829",
+    "description": "Initial review of the appellant's grounds for appeal.",
+    "due_date": "2026-03-14T09:00:00Z",
+    "status": "in-progress"
+  },
+  {
+    "id": 2,
+    "title": "Submit Form A1",
+    "description": null,
+    "due_date": "2026-03-10T17:00:00Z",
+    "status": "done"
+  },
+  {
+    "id": 3,
+    "title": "Client Consultation: Smith vs. Regina",
+    "description": "Virtual meeting to discuss witness statements.",
+    "due_date": "2026-03-20T14:30:00Z",
+    "status": "todo"
+  },
+  {
+    "id": 4,
+    "title": "Archive Closed Files - Feb",
+    "description": "Move February 2026 files to long-term storage.",
+    "due_date": "2026-03-25T12:00:00Z",
+    "status": "overdue"
+  },
+  {
+    "id": 5,
+    "title": "Urgent Bail Application",
+    "description": "High-priority filing for the High Court.",
+    "due_date": "2026-03-13T11:00:00Z",
+    "status": "in-progress"
+  },
+  {
+    "id": 6,
+    "title": "Draft Sentencing Notes",
+    "description": null,
+    "due_date": "2026-03-18T10:00:00Z",
+    "status": "todo"
+  },
+  {
+    "id": 7,
+    "title": "Verify ID Documents",
+    "description": "Compliance check for new caseworker onboard.",
+    "due_date": "2026-03-12T16:45:00Z",
+    "status": "done"
+  }
+]
