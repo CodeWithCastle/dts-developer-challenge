@@ -14,28 +14,34 @@ const TaskSideview = ({ modalType, onClose, onSave, onEdit, onDelete, taskId }) 
 
     const formatDateForInput = (isoStr) => isoStr ? isoStr.split('T')[0] : '';
 
-    const task = taskId ? getTask(taskId) : null;
-
     useEffect(() => {
-        if (modalType === 'form') {
-            if (task) {
-                setFormData({
-                    id: task.id,
-                    title: task.title || '',
-                    description: task.description || '',
-                    due_date: formatDateForInput(task.due_date),
-                    status: task.status || 'todo'
-                });
+        // Define the async function inside
+        const fetchTask = async () => {
+            if (taskId) {
+                const task = await getTask(taskId);
+                if (task) {
+                    setFormData({
+                        id: task.id,
+                        title: task.title || '',
+                        description: task.description || '',
+                        due_date: formatDateForInput(task.due_date),
+                        status: task.status || 'todo'
+                    });
+                }
             } else {
+                // Reset for "New Task" mode
                 setFormData({ title: '', description: '', due_date: '', status: 'todo' });
             }
-        }
-    }, [taskId, modalType, task]); 
+            setIsDirty(false); // Reset dirty state when a new task loads
+        };
+
+        fetchTask();
+    }, [taskId, modalType, getTask]); // Added getTask as a dependency
 
     if (!modalType) return null;
 
-    const displayDate = task?.due_date 
-        ? new Date(task.due_date).toLocaleDateString('en-US', {
+    const displayDate = formData?.due_date 
+        ? new Date(formData.due_date).toLocaleDateString('en-US', {
             month: 'long', day: 'numeric', year: 'numeric',
         })
         : 'No date set';
@@ -110,26 +116,26 @@ const TaskSideview = ({ modalType, onClose, onSave, onEdit, onDelete, taskId }) 
 
                     {/* --- Profile View --- */}
                     <div className={`task-profile-container ${modalType === 'profile' ? 'show' : ''}`}>
-                        {task ? (
+                        {formData ? (
                             <div className="gh-view">
                                 <div className="gh-view-header">
                                     <div className="gh-view-title-row">
-                                        <h1 className="gh-view-title">{task.title}</h1>
-                                        <span className="gh-view-id">#{task.id}</span>
+                                        <h1 className="gh-view-title">{formData.title}</h1>
+                                        <span className="gh-view-id">#{formData.id}</span>
                                     </div>
                                     <div className="gh-view-meta">
-                                        <span className={`gh-badge ${task.status}`}>{task.status}</span>
+                                        <span className={`gh-badge ${formData.status}`}>{formData.status}</span>
                                         <span className="gh-meta-text">Due on <strong>{displayDate}</strong></span>
                                     </div>
                                 </div>
                                 <div className="gh-view-body">
                                     <h4 className="gh-section-label">Description</h4>
-                                    <div className="gh-description-box">{task.description || <i>No description.</i>}</div>
+                                    <div className="gh-description-box">{formData.description || <i>No description.</i>}</div>
                                 </div>
                                 <div className="gh-view-footer">
                                     <button type="button" className="btn btn-cancel" onClick={handleCancel}>Cancel</button>
-                                    <button className="btn btn-outline" onClick={() => onEdit(task.id)}>Edit Task</button>
-                                    <button className="btn btn-danger" onClick={() => onDelete(task.id)}>Delete</button>
+                                    <button className="btn btn-outline" onClick={() => onEdit(formData.id)}>Edit Task</button>
+                                    <button className="btn btn-danger" onClick={() => onDelete(formData.id)}>Delete</button>
                                 </div>
                             </div>
                         ) : (

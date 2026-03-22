@@ -1,5 +1,6 @@
 import React, { useState, useMemo, createContext, useEffect, useCallback } from "react";
 import mockData from './../data/mock-tasks.json';
+import taskService from '../services/TaskService';
 
 export const TaskContext = createContext();
 
@@ -16,10 +17,12 @@ const TaskProvider = ({ children }) => {
             try {
                 setLoading(true);
 
-                // Simulate network delay if needed
-                // ...
+                // USE WITH NO BACKEND
+                // setTasks(mockData);
 
-                setTasks(mockData);
+                // USE WITH BACKEND
+                const data = await taskService.getAllTasks() || mockData;
+                setTasks(data);
             } catch (err) {
                 setError("Failed to load tasks.");
                 console.error(err);
@@ -32,46 +35,81 @@ const TaskProvider = ({ children }) => {
 
     // --- Actions ---
 
-    const addTask = useCallback((task) => {
+    const addTask = useCallback(async (task) => {
         if (!task.title || !task.title?.trim()) {
             console.warn("Attempted to add a task without a title.");
             return; 
         }
-        setTasks(prev => [
-            { ...task, id: Date.now(), status: task.status || 'todo' }, ...prev
-        ]);
+
+        if(task.due_date === '') task.due_date = null;
+
+        try {
+            const newTaskFromDB = await taskService.createTask(task);
+            setTasks(prev => [newTaskFromDB, ...prev]);
+        } catch (err) {
+            console.error("Failed to add task to database:", err);
+            // Optional: Trigger a UI notification here
+        }
     }, []);
 
-    const deleteTask = useCallback((id) => {
-        setTasks(prev => prev.filter(task => task.id !== id));
+    const deleteTask = useCallback(async (id) => {
+        try {
+            await taskService.deleteTask(id);
+            setTasks(prev => prev.filter(task => task.id !== id));
+        } catch (err) {
+            console.error("Failed to delete task from database:", err);
+            // setError("Could not delete task. Please try again.");
+        }
     }, []);
 
-    const updateTask = useCallback((id, updates) => {
-        setTasks(prev => prev.map(task => {
-            if (task.id === id) {
-                return typeof updates === 'string' 
-                    ? { ...task, status: updates } 
-                    : { ...task, ...updates };
-            }
-            return task;
-        }));
+    const updateTask = useCallback(async (id, updates) => {
+        if(updates?.due_date === '') updates.due_date = null;
+
+        try {
+            const updatedTask = typeof updates === 'string' 
+                ? await taskService.updateTaskStatus(id, updates)
+                : await taskService.updateTask(id, updates);
+
+            setTasks(prev => prev.map(task => (task.id === id ? updatedTask : task)));
+        } catch (err) {
+            console.error("Update failed in Database:", err);
+        }
     }, []);
 
-    const getTask = useCallback((id) => {
-        return tasks.find(item => item.id === id);
+    const getTask = useCallback(async (id) => {
+        const localTask = tasks.find(item => item.id === parseInt(id));
+        if (localTask) return localTask;
+
+        try {
+            return await taskService.getTaskById(id);
+        } catch (err) {
+            console.error("Task not found in DB:", err);
+            return null;
+        }
     }, [tasks]);
 
     const updateList = useCallback((category) => setListCategory(category), []);
     const searchForTask = useCallback((query) => setSearchQuery(query), []);
 
-    const bulkUpdateStatus = useCallback((ids) => {
-        setTasks(prev => prev.map(task => 
-            ids.includes(task.id) ? { ...task, status: 'done' } : task
-        ));
+    const bulkUpdateStatus = useCallback(async (ids) => {
+        try {
+            await taskService.bulkUpdateStatus(ids, 'done');
+
+            setTasks(prev => prev.map(task => 
+                ids.includes(task.id) ? { ...task, status: 'done' } : task
+            ));
+        } catch (err) {
+            console.error("Bulk update failed:", err);
+        }
     }, []);
 
-    const bulkDeleteTasks = useCallback((ids) => {
-        setTasks(prev => prev.filter(task => !ids.includes(task.id)));
+    const bulkDeleteTasks = useCallback(async (ids) => {
+        try {
+            await taskService.bulkDeleteTasks(ids); // Call the server!
+            setTasks(prev => prev.filter(task => !ids.includes(task.id)));
+        } catch (err) {
+            console.error("Bulk delete failed:", err);
+        }
     }, []);
 
     // --- Derived State ---

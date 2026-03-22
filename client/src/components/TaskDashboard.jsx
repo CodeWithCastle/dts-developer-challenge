@@ -1,5 +1,7 @@
-import React, { useMemo, useState } from 'react'; // Added useMemo import
+import React, { useMemo, useState, useContext } from 'react'; // Added useMemo import
 import TaskItem from './TaskItem';
+import { TaskContext } from '../contexts/TaskProvider';
+
 
 const TaskDashboard = ({
     tasks, 
@@ -11,8 +13,10 @@ const TaskDashboard = ({
     onViewTask, 
     onUpdateTask,
 }) => {
-    const [menuData, setMenuData] = useState({ visible: false, x: 0, y: 0 });
 
+    const {filtered_tasks} = useContext(TaskContext);
+
+    const [menuData, setMenuData] = useState({ visible: false, x: 0, y: 0 });
     const handleContextMenu = (e, id) => {
         e.preventDefault();
 
@@ -44,7 +48,7 @@ const TaskDashboard = ({
                     <div className='pill task-dashboard-head-icon'></div>
                     <span className="category-label">{category}</span>
                     {/* Senior Touch: Show how many are currently filtered */}
-                    <span className="task-count-badge">{tasks.length}</span>
+                    <span className="task-count-badge">{filtered_tasks.length}</span>
                 </div>
                 
                 <div className='task-dashboard-head-right'>
@@ -69,8 +73,8 @@ const TaskDashboard = ({
             </div>
 
             <div className='task-dashboard-body'>
-                {tasks.length > 0 ? (
-                    tasks.map(task => (
+                {filtered_tasks.length > 0 ? (
+                    filtered_tasks.map(task => (
                         <TaskItem
                             key={task.id}
                             task={task}

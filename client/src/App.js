@@ -8,8 +8,10 @@ import TaskDashboard from './components/TaskDashboard'
 import TaskSideview from './components/TaskSideview';
 
 const App = () => {
+  // console.log(process.env.client.REACT_APP_API_URL);
+
   const {
-    filtered_tasks, updateList, listCategory, 
+    updateList, listCategory, 
     updateTask, addTask, deleteTask,
     loading, error, taskSummary,
     searchTask, searchForTask,
@@ -61,8 +63,8 @@ const App = () => {
   // --- Task Actions (Standard Functions) ---
 
   const handleViewTask = (taskId) => {
-      setSelectedTaskId(taskId);
-      setModalType('profile');
+    setSelectedTaskId(taskId);
+    setModalType('profile');
   };
 
   const setModalType = (type) => {
@@ -127,7 +129,7 @@ const App = () => {
 
               <div className='task-dashboard pill'>
                 <TaskDashboard 
-                  tasks={filtered_tasks}
+                  // tasks={filtered_tasks}
                   category={listCategory}
                   selectedTasks={selectedTasks}
                   onCompleteMarked={handleBulkMarkDone}
