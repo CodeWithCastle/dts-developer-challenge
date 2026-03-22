@@ -77,7 +77,7 @@ const taskService = {
     // BULK DELETE TASKS
     bulkDeleteTasks: async (ids) => {
         const response = await fetch(`${API_BASE_URL}/bulk-delete`, {
-            method: 'POST', // Matching the router fix above
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ids }),
         });
