@@ -84,7 +84,7 @@ Run the following command from the root directory:
 
 ```bash
 # Install dependencies across all layers
-npm install && cd server && npm install && cd ../client && npm install && cd ..
+npm install && cd server && npm install cors dotenv pg --save-dev nodemon express && cd ../client && npm install && cd ..
 
 # Create the database (requires psql CLI)
 psql -c "CREATE DATABASE hmcts_tasks;"
@@ -104,6 +104,13 @@ DB_NAME=hmcts_tasks
 DB_HOST=localhost
 DB_PORT=5432
 SCHEMA_VERSION=1.0.0
+```
+#### Server (`/server/package.json`)
+
+```
+"scripts": {
+  "dev": "nodemon app.js"
+}
 ```
 
 #### Client (`/client/.env`)
