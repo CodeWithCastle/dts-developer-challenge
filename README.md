@@ -98,7 +98,7 @@ psql -c "CREATE DATABASE hmcts_tasks;"
 
 ```env
 PORT=8080
-DB_USER=dan_aremu
+DB_USER=postgres
 DB_PASSWORD=
 DB_NAME=hmcts_tasks
 DB_HOST=localhost
