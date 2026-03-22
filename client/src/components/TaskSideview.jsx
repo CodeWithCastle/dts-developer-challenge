@@ -134,7 +134,7 @@ const TaskSideview = ({ modalType, onClose, onSave, onEdit, onDelete, taskId }) 
                                 </div>
                                 <div className="gh-view-footer">
                                     <button type="button" className="btn btn-cancel" onClick={handleCancel}>Cancel</button>
-                                    <button className="btn btn-outline" onClick={() => onEdit(formData.id)}>Edit Task</button>
+                                    {formData.status !== 'done' && <button className="btn btn-outline" onClick={() => onEdit(formData.id)}>Edit Task</button>}
                                     <button className="btn btn-danger" onClick={() => onDelete(formData.id)}>Delete</button>
                                 </div>
                             </div>

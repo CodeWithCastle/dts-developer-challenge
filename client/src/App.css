@@ -304,6 +304,10 @@
     padding: 0;
     gap: 0;
 
+    .empty-state {
+      padding: var(--padding) calc(var(--padding) * 2);
+    }
+
     .task-list-content {
       width: 100%;
       height: auto;
