@@ -1,9 +1,11 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 const taskService = {
     // GET all tasks
     getAllTasks: async () => {
+        // console.log('REACT_APP_API_URL:', API_BASE_URL);
+
         const response = await fetch(API_BASE_URL);
         if (!response.ok) throw new Error('Failed to fetch tasks from server');
         return await response.json();
