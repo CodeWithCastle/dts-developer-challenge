@@ -1,10 +1,10 @@
 # 
 /client/node_modules
+/client/build
 /client/.pnp
 /client/.pnp.js
 /client/.env
 /client/.env.client
-/client/.gitignore
 
 
 # 
@@ -12,12 +12,6 @@
 /server/.env
 /server/.gitignore
 
-
-# testing
-/coverage
-
-# production
-/build
 
 # misc
 .DS_Store

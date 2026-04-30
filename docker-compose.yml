@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    ports:
+      - "8080:8282"
+    environment:
+      - PORT=8282
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=hmcts_db_user
+      - DB_PASSWORD=postgres
+      - DB_NAME=hmcts_tasks_db
+      - DATABASE_URL=postgres://hmcts_db_user:postgres@db:5432/hmcts_tasks_db
+      - SCHEMA_VERSION=1.0.0
+      - ALLOWED_ORIGINS=http://localhost:8000,http://localhost:3000,http://localhost:3001
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=hmcts_db_user
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=hmcts_tasks_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  frontend:
+    build: ./client
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=docker-development
+      - API_BASE_URL=http://localhost:8080
+      - API_ENDPOINT_URL=/api/tasks
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
