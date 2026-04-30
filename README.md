@@ -13,11 +13,12 @@ A simple full-stack task management application designed for administrative work
 
 This README provides a professional, comprehensive overview for developers and HMCTS stakeholders. It covers:
 
-* Full-stack architecture
-* Performance and scalability
-* Setup and environment configuration
-* Development approach and engineering decisions
-* Future improvements and contributing guidelines
+* [Setup and configuration](#getting-started)
+* [] (Application architecture)
+* [] (Features)
+* [] (Key engineering decisions)
+* [] (Project structure)
+* [] (Container Visualizations)
 
 ---
 
@@ -61,29 +62,6 @@ Backend API: [http://localhost:8000/api/tasks] (http://localhost:8000/api/tasks)
 
 ---
 
-## 🌟 Key Features
-
-### Core Functionality
-
-* **Full CRUD Lifecycle:** Create, Read, Update, and Delete tasks with real-time database synchronization.
-* **Dynamic Filtering:** Instant search with category views (Todo, In-Progress, Done, Overdue).
-* **Smart Sideview UI:** GitHub-inspired drawer for both task creation and detailed inspection.
-* **Dirty State Protection:** Prevents accidental loss of unsaved changes.
-
-### Performance & Scalability
-
-* **Bulk Operations:** High-performance batch updates and deletes using PostgreSQL `ANY()`.
-* **Optimized Rendering:** React performance tuning using `useCallback`, `useContext`, and `useMemo`.
-* **N+1 Query Elimination:** Replaced inefficient loops with single SQL statements.
-
-### Data Integrity
-
-* **Schema Versioning:** Controlled database initialization using a `schema_info` table.
-* **Automated Seeding:** Ensures consistent environments across development and deployment.
-* **Sample Seeding:** Provides initial data for testing and QA.
-
----
-
 ## 🏗️ Technical Architecture
 
 ### Frontend
@@ -105,6 +83,29 @@ Backend API: [http://localhost:8000/api/tasks] (http://localhost:8000/api/tasks)
 * **System:** PostgreSQL
 * **Design:** Relational schema
 * **Optimization:** Bulk queries using `ANY()` operator
+
+---
+
+## 🌟 Key Features
+
+### Core Functionality
+
+* **Full CRUD Lifecycle:** Create, Read, Update, and Delete tasks with real-time database synchronization.
+* **Dynamic Filtering:** Instant search with category views (Todo, In-Progress, Done, Overdue).
+* **Smart Sideview UI:** GitHub-inspired drawer for both task creation and detailed inspection.
+* **Dirty State Protection:** Prevents accidental loss of unsaved changes.
+
+### Performance & Scalability
+
+* **Bulk Operations:** High-performance batch updates and deletes using PostgreSQL `ANY()`.
+* **Optimized Rendering:** React performance tuning using `useCallback`, `useContext`, and `useMemo`.
+* **N+1 Query Elimination:** Replaced inefficient loops with single SQL statements.
+
+### Data Integrity
+
+* **Schema Versioning:** Controlled database initialization using a `schema_info` table.
+* **Automated Seeding:** Ensures consistent environments across development and deployment.
+* **Sample Seeding:** Provides initial data for testing and QA.
 
 ---
 
