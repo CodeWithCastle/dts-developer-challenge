@@ -14,11 +14,11 @@ A simple full-stack task management application designed for administrative work
 This README provides a professional, comprehensive overview for developers and HMCTS stakeholders. It covers:
 
 * [Setup and configuration](#-getting-started)
-* [Application architecture] (#%EF%B8%8F-technical-architecture)
-* [Key Features] (#-key-features)
-* [Engineering Decisions] (#-key-engineering-decisions)
-* [Project structure] (#-project-file-structure)
-* [Container Visualizations] (#visualizations)
+* [Application architecture](#%EF%B8%8F-technical-architecture)
+* [Key Features](#-key-features)
+* [Engineering Decisions](#-key-engineering-decisions)
+* [Project structure](#-project-file-structure)
+* [Container Visualizations](#visualizations)
 
 ---
 
