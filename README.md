@@ -21,6 +21,46 @@ This README provides a professional, comprehensive overview for developers and H
 
 ---
 
+## 🚀 Getting Started
+
+### Prerequisites
+Ensure the following are installed on your device:
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
+
+### Installation & Setup
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/CodeWithCastle/dts-developer-challenge.git
+cd dts-developer-challenge
+```
+
+#### 2. Spin up the environment:
+Run the following command in the root directory. This will build the images and start all services (database, server, and client).
+
+```bash
+docker-compose up --build
+```
+
+#### 3. Access the application:
+
+Frontend: [http://localhost:3000] (http://localhost:3000)
+Backend API: [http://localhost:8000/api/tasks] (http://localhost:8000/api/tasks) (or your designated port)
+
+---
+
+### 🛠 Development Commands
+
+| Task            | Command                                                |
+| --------------- | ------------------------------------------------------ |
+| Start Services  | `docker-compose up`                                    |
+| Stop Services   | `docker-compose down`                                  |
+| Rebuild Images  | `docker-compose up --build`                            |
+| View Logs       | `docker-compose logs -f`                               |
+| Remove Volumes  | `docker-compose down -v` (useful for resetting the DB) |
+
+---
+
 ## 🌟 Key Features
 
 ### Core Functionality
@@ -65,46 +105,6 @@ This README provides a professional, comprehensive overview for developers and H
 * **System:** PostgreSQL
 * **Design:** Relational schema
 * **Optimization:** Bulk queries using `ANY()` operator
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-Ensure the following are installed on your device:
-* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
-
-### Installation & Setup
-#### 1. Clone the Repository
-
-```bash
-git clone https://github.com/CodeWithCastle/dts-developer-challenge.git
-cd dts-developer-challenge
-```
-
-#### 2. Spin up the environment:
-Run the following command in the root directory. This will build the images and start all services (database, server, and client).
-
-```bash
-docker-compose up --build
-```
-
-#### 3. Access the application:
-
-Frontend: [http://localhost:3000] (http://localhost:3000)
-Backend API: [http://localhost:8000/api/tasks] (http://localhost:8000/api/tasks) (or your designated port)
-
----
-
-### 🛠 Development Commands
-
-| Task            | Command                                                |
-| --------------- | ------------------------------------------------------ |
-| Start Services  | `docker-compose up`                                    |
-| Stop Services   | `docker-compose down`                                  |
-| Rebuild Images  | `docker-compose up --build`                            |
-| View Logs       | `docker-compose logs -f`                               |
-| Remove Volumes  | `docker-compose down -v` (useful for resetting the DB) |
 
 ---
 
