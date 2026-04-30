@@ -25,7 +25,7 @@ This README provides a professional, comprehensive overview for developers and H
 ## 🚀 Getting Started
 
 ### Prerequisites
-Ensure the following are installed on your device:
+Ensure the following is installed on your device:
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
 
 ### Installation & Setup
