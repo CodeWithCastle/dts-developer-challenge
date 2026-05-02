@@ -45,8 +45,8 @@ docker-compose up --build
 
 #### 3. Access the application:
 
-Frontend: [http://localhost:3000] (http://localhost:3000)
-Backend API: [http://localhost:8000/api/tasks] (http://localhost:8000/api/tasks) (or your designated port)
+- Frontend: [http://localhost:3000] (http://localhost:3000)
+- Backend API: [http://localhost:8000/api/tasks] (http://localhost:8000/api/tasks) (or your designated port)
 
 ---
 
